@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longwu.maney.dao.ActInfoMapper">
+  <resultMap id="BaseResultMap" type="com.longwu.maney.model.ActInfo">
+    <id column="ACT_ID" jdbcType="BIGINT" property="actId" />
+    <result column="GOODS_ID" jdbcType="CHAR" property="goodsId" />
+    <result column="ACT_DATE" jdbcType="CHAR" property="actDate" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="CHAR" property="updateTime" />
+    <result column="T5" jdbcType="CHAR" property="t5" />
+    <result column="T6" jdbcType="CHAR" property="t6" />
+    <result column="T7" jdbcType="CHAR" property="t7" />
+    <result column="T8" jdbcType="CHAR" property="t8" />
+    <result column="T9" jdbcType="CHAR" property="t9" />
+    <result column="T10" jdbcType="CHAR" property="t10" />
+    <result column="T11" jdbcType="CHAR" property="t11" />
+    <result column="T12" jdbcType="CHAR" property="t12" />
+    <result column="T13" jdbcType="CHAR" property="t13" />
+    <result column="T14" jdbcType="CHAR" property="t14" />
+    <result column="T15" jdbcType="CHAR" property="t15" />
+    <result column="T16" jdbcType="CHAR" property="t16" />
+    <result column="T17" jdbcType="CHAR" property="t17" />
+    <result column="T18" jdbcType="CHAR" property="t18" />
+    <result column="T19" jdbcType="CHAR" property="t19" />
+    <result column="T20" jdbcType="CHAR" property="t20" />
+    <result column="T21" jdbcType="CHAR" property="t21" />
+    <result column="T22" jdbcType="CHAR" property="t22" />
+    <result column="T23" jdbcType="CHAR" property="t23" />
+    <result column="T24" jdbcType="CHAR" property="t24" />
+    <result column="T5R" jdbcType="CHAR" property="t5r" />
+    <result column="T6R" jdbcType="CHAR" property="t6r" />
+    <result column="T7R" jdbcType="CHAR" property="t7r" />
+    <result column="T8R" jdbcType="CHAR" property="t8r" />
+    <result column="T9R" jdbcType="CHAR" property="t9r" />
+    <result column="T10R" jdbcType="CHAR" property="t10r" />
+    <result column="T11R" jdbcType="CHAR" property="t11r" />
+    <result column="T12R" jdbcType="CHAR" property="t12r" />
+    <result column="T13R" jdbcType="CHAR" property="t13r" />
+    <result column="T14R" jdbcType="CHAR" property="t14r" />
+    <result column="T15R" jdbcType="CHAR" property="t15r" />
+    <result column="T16R" jdbcType="CHAR" property="t16r" />
+    <result column="T17R" jdbcType="CHAR" property="t17r" />
+    <result column="T18R" jdbcType="CHAR" property="t18r" />
+    <result column="T19R" jdbcType="CHAR" property="t19r" />
+    <result column="T20R" jdbcType="CHAR" property="t20r" />
+    <result column="T21R" jdbcType="CHAR" property="t21r" />
+    <result column="T22R" jdbcType="CHAR" property="t22r" />
+    <result column="T23R" jdbcType="CHAR" property="t23r" />
+    <result column="T24R" jdbcType="CHAR" property="t24r" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ACT_ID, GOODS_ID, ACT_DATE, CREATE_TIME, UPDATE_TIME, T5, T6, T7, T8, T9, T10, T11, 
+    T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T5R, T6R, T7R, T8R, 
+    T9R, T10R, T11R, T12R, T13R, T14R, T15R, T16R, T17R, T18R, T19R, T20R, T21R, T22R, 
+    T23R, T24R
+  </sql>
+  <select id="selectByExample" parameterType="com.longwu.maney.model.ActInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from maney_act_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from maney_act_info
+    where ACT_ID = #{actId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from maney_act_info
+    where ACT_ID = #{actId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.longwu.maney.model.ActInfoExample">
+    delete from maney_act_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.longwu.maney.model.ActInfo">
+    insert into maney_act_info (ACT_ID, GOODS_ID, ACT_DATE, 
+      CREATE_TIME, UPDATE_TIME, T5, 
+      T6, T7, T8, T9, 
+      T10, T11, T12, T13, 
+      T14, T15, T16, T17, 
+      T18, T19, T20, T21, 
+      T22, T23, T24, T5R, 
+      T6R, T7R, T8R, T9R, 
+      T10R, T11R, T12R, T13R, 
+      T14R, T15R, T16R, T17R, 
+      T18R, T19R, T20R, T21R, 
+      T22R, T23R, T24R)
+    values (#{actId,jdbcType=BIGINT}, #{goodsId,jdbcType=CHAR}, #{actDate,jdbcType=CHAR}, 
+      #{createTime,jdbcType=CHAR}, #{updateTime,jdbcType=CHAR}, #{t5,jdbcType=CHAR}, 
+      #{t6,jdbcType=CHAR}, #{t7,jdbcType=CHAR}, #{t8,jdbcType=CHAR}, #{t9,jdbcType=CHAR}, 
+      #{t10,jdbcType=CHAR}, #{t11,jdbcType=CHAR}, #{t12,jdbcType=CHAR}, #{t13,jdbcType=CHAR}, 
+      #{t14,jdbcType=CHAR}, #{t15,jdbcType=CHAR}, #{t16,jdbcType=CHAR}, #{t17,jdbcType=CHAR}, 
+      #{t18,jdbcType=CHAR}, #{t19,jdbcType=CHAR}, #{t20,jdbcType=CHAR}, #{t21,jdbcType=CHAR}, 
+      #{t22,jdbcType=CHAR}, #{t23,jdbcType=CHAR}, #{t24,jdbcType=CHAR}, #{t5r,jdbcType=CHAR}, 
+      #{t6r,jdbcType=CHAR}, #{t7r,jdbcType=CHAR}, #{t8r,jdbcType=CHAR}, #{t9r,jdbcType=CHAR}, 
+      #{t10r,jdbcType=CHAR}, #{t11r,jdbcType=CHAR}, #{t12r,jdbcType=CHAR}, #{t13r,jdbcType=CHAR}, 
+      #{t14r,jdbcType=CHAR}, #{t15r,jdbcType=CHAR}, #{t16r,jdbcType=CHAR}, #{t17r,jdbcType=CHAR}, 
+      #{t18r,jdbcType=CHAR}, #{t19r,jdbcType=CHAR}, #{t20r,jdbcType=CHAR}, #{t21r,jdbcType=CHAR}, 
+      #{t22r,jdbcType=CHAR}, #{t23r,jdbcType=CHAR}, #{t24r,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.longwu.maney.model.ActInfo">
+    insert into maney_act_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="actId != null">
+        ACT_ID,
+      </if>
+      <if test="goodsId != null">
+        GOODS_ID,
+      </if>
+      <if test="actDate != null">
+        ACT_DATE,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="t5 != null">
+        T5,
+      </if>
+      <if test="t6 != null">
+        T6,
+      </if>
+      <if test="t7 != null">
+        T7,
+      </if>
+      <if test="t8 != null">
+        T8,
+      </if>
+      <if test="t9 != null">
+        T9,
+      </if>
+      <if test="t10 != null">
+        T10,
+      </if>
+      <if test="t11 != null">
+        T11,
+      </if>
+      <if test="t12 != null">
+        T12,
+      </if>
+      <if test="t13 != null">
+        T13,
+      </if>
+      <if test="t14 != null">
+        T14,
+      </if>
+      <if test="t15 != null">
+        T15,
+      </if>
+      <if test="t16 != null">
+        T16,
+      </if>
+      <if test="t17 != null">
+        T17,
+      </if>
+      <if test="t18 != null">
+        T18,
+      </if>
+      <if test="t19 != null">
+        T19,
+      </if>
+      <if test="t20 != null">
+        T20,
+      </if>
+      <if test="t21 != null">
+        T21,
+      </if>
+      <if test="t22 != null">
+        T22,
+      </if>
+      <if test="t23 != null">
+        T23,
+      </if>
+      <if test="t24 != null">
+        T24,
+      </if>
+      <if test="t5r != null">
+        T5R,
+      </if>
+      <if test="t6r != null">
+        T6R,
+      </if>
+      <if test="t7r != null">
+        T7R,
+      </if>
+      <if test="t8r != null">
+        T8R,
+      </if>
+      <if test="t9r != null">
+        T9R,
+      </if>
+      <if test="t10r != null">
+        T10R,
+      </if>
+      <if test="t11r != null">
+        T11R,
+      </if>
+      <if test="t12r != null">
+        T12R,
+      </if>
+      <if test="t13r != null">
+        T13R,
+      </if>
+      <if test="t14r != null">
+        T14R,
+      </if>
+      <if test="t15r != null">
+        T15R,
+      </if>
+      <if test="t16r != null">
+        T16R,
+      </if>
+      <if test="t17r != null">
+        T17R,
+      </if>
+      <if test="t18r != null">
+        T18R,
+      </if>
+      <if test="t19r != null">
+        T19R,
+      </if>
+      <if test="t20r != null">
+        T20R,
+      </if>
+      <if test="t21r != null">
+        T21R,
+      </if>
+      <if test="t22r != null">
+        T22R,
+      </if>
+      <if test="t23r != null">
+        T23R,
+      </if>
+      <if test="t24r != null">
+        T24R,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="actId != null">
+        #{actId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=CHAR},
+      </if>
+      <if test="actDate != null">
+        #{actDate,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="t5 != null">
+        #{t5,jdbcType=CHAR},
+      </if>
+      <if test="t6 != null">
+        #{t6,jdbcType=CHAR},
+      </if>
+      <if test="t7 != null">
+        #{t7,jdbcType=CHAR},
+      </if>
+      <if test="t8 != null">
+        #{t8,jdbcType=CHAR},
+      </if>
+      <if test="t9 != null">
+        #{t9,jdbcType=CHAR},
+      </if>
+      <if test="t10 != null">
+        #{t10,jdbcType=CHAR},
+      </if>
+      <if test="t11 != null">
+        #{t11,jdbcType=CHAR},
+      </if>
+      <if test="t12 != null">
+        #{t12,jdbcType=CHAR},
+      </if>
+      <if test="t13 != null">
+        #{t13,jdbcType=CHAR},
+      </if>
+      <if test="t14 != null">
+        #{t14,jdbcType=CHAR},
+      </if>
+      <if test="t15 != null">
+        #{t15,jdbcType=CHAR},
+      </if>
+      <if test="t16 != null">
+        #{t16,jdbcType=CHAR},
+      </if>
+      <if test="t17 != null">
+        #{t17,jdbcType=CHAR},
+      </if>
+      <if test="t18 != null">
+        #{t18,jdbcType=CHAR},
+      </if>
+      <if test="t19 != null">
+        #{t19,jdbcType=CHAR},
+      </if>
+      <if test="t20 != null">
+        #{t20,jdbcType=CHAR},
+      </if>
+      <if test="t21 != null">
+        #{t21,jdbcType=CHAR},
+      </if>
+      <if test="t22 != null">
+        #{t22,jdbcType=CHAR},
+      </if>
+      <if test="t23 != null">
+        #{t23,jdbcType=CHAR},
+      </if>
+      <if test="t24 != null">
+        #{t24,jdbcType=CHAR},
+      </if>
+      <if test="t5r != null">
+        #{t5r,jdbcType=CHAR},
+      </if>
+      <if test="t6r != null">
+        #{t6r,jdbcType=CHAR},
+      </if>
+      <if test="t7r != null">
+        #{t7r,jdbcType=CHAR},
+      </if>
+      <if test="t8r != null">
+        #{t8r,jdbcType=CHAR},
+      </if>
+      <if test="t9r != null">
+        #{t9r,jdbcType=CHAR},
+      </if>
+      <if test="t10r != null">
+        #{t10r,jdbcType=CHAR},
+      </if>
+      <if test="t11r != null">
+        #{t11r,jdbcType=CHAR},
+      </if>
+      <if test="t12r != null">
+        #{t12r,jdbcType=CHAR},
+      </if>
+      <if test="t13r != null">
+        #{t13r,jdbcType=CHAR},
+      </if>
+      <if test="t14r != null">
+        #{t14r,jdbcType=CHAR},
+      </if>
+      <if test="t15r != null">
+        #{t15r,jdbcType=CHAR},
+      </if>
+      <if test="t16r != null">
+        #{t16r,jdbcType=CHAR},
+      </if>
+      <if test="t17r != null">
+        #{t17r,jdbcType=CHAR},
+      </if>
+      <if test="t18r != null">
+        #{t18r,jdbcType=CHAR},
+      </if>
+      <if test="t19r != null">
+        #{t19r,jdbcType=CHAR},
+      </if>
+      <if test="t20r != null">
+        #{t20r,jdbcType=CHAR},
+      </if>
+      <if test="t21r != null">
+        #{t21r,jdbcType=CHAR},
+      </if>
+      <if test="t22r != null">
+        #{t22r,jdbcType=CHAR},
+      </if>
+      <if test="t23r != null">
+        #{t23r,jdbcType=CHAR},
+      </if>
+      <if test="t24r != null">
+        #{t24r,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.longwu.maney.model.ActInfoExample" resultType="java.lang.Long">
+    select count(*) from maney_act_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update maney_act_info
+    <set>
+      <if test="record.actId != null">
+        ACT_ID = #{record.actId,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodsId != null">
+        GOODS_ID = #{record.goodsId,jdbcType=CHAR},
+      </if>
+      <if test="record.actDate != null">
+        ACT_DATE = #{record.actDate,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      </if>
+      <if test="record.t5 != null">
+        T5 = #{record.t5,jdbcType=CHAR},
+      </if>
+      <if test="record.t6 != null">
+        T6 = #{record.t6,jdbcType=CHAR},
+      </if>
+      <if test="record.t7 != null">
+        T7 = #{record.t7,jdbcType=CHAR},
+      </if>
+      <if test="record.t8 != null">
+        T8 = #{record.t8,jdbcType=CHAR},
+      </if>
+      <if test="record.t9 != null">
+        T9 = #{record.t9,jdbcType=CHAR},
+      </if>
+      <if test="record.t10 != null">
+        T10 = #{record.t10,jdbcType=CHAR},
+      </if>
+      <if test="record.t11 != null">
+        T11 = #{record.t11,jdbcType=CHAR},
+      </if>
+      <if test="record.t12 != null">
+        T12 = #{record.t12,jdbcType=CHAR},
+      </if>
+      <if test="record.t13 != null">
+        T13 = #{record.t13,jdbcType=CHAR},
+      </if>
+      <if test="record.t14 != null">
+        T14 = #{record.t14,jdbcType=CHAR},
+      </if>
+      <if test="record.t15 != null">
+        T15 = #{record.t15,jdbcType=CHAR},
+      </if>
+      <if test="record.t16 != null">
+        T16 = #{record.t16,jdbcType=CHAR},
+      </if>
+      <if test="record.t17 != null">
+        T17 = #{record.t17,jdbcType=CHAR},
+      </if>
+      <if test="record.t18 != null">
+        T18 = #{record.t18,jdbcType=CHAR},
+      </if>
+      <if test="record.t19 != null">
+        T19 = #{record.t19,jdbcType=CHAR},
+      </if>
+      <if test="record.t20 != null">
+        T20 = #{record.t20,jdbcType=CHAR},
+      </if>
+      <if test="record.t21 != null">
+        T21 = #{record.t21,jdbcType=CHAR},
+      </if>
+      <if test="record.t22 != null">
+        T22 = #{record.t22,jdbcType=CHAR},
+      </if>
+      <if test="record.t23 != null">
+        T23 = #{record.t23,jdbcType=CHAR},
+      </if>
+      <if test="record.t24 != null">
+        T24 = #{record.t24,jdbcType=CHAR},
+      </if>
+      <if test="record.t5r != null">
+        T5R = #{record.t5r,jdbcType=CHAR},
+      </if>
+      <if test="record.t6r != null">
+        T6R = #{record.t6r,jdbcType=CHAR},
+      </if>
+      <if test="record.t7r != null">
+        T7R = #{record.t7r,jdbcType=CHAR},
+      </if>
+      <if test="record.t8r != null">
+        T8R = #{record.t8r,jdbcType=CHAR},
+      </if>
+      <if test="record.t9r != null">
+        T9R = #{record.t9r,jdbcType=CHAR},
+      </if>
+      <if test="record.t10r != null">
+        T10R = #{record.t10r,jdbcType=CHAR},
+      </if>
+      <if test="record.t11r != null">
+        T11R = #{record.t11r,jdbcType=CHAR},
+      </if>
+      <if test="record.t12r != null">
+        T12R = #{record.t12r,jdbcType=CHAR},
+      </if>
+      <if test="record.t13r != null">
+        T13R = #{record.t13r,jdbcType=CHAR},
+      </if>
+      <if test="record.t14r != null">
+        T14R = #{record.t14r,jdbcType=CHAR},
+      </if>
+      <if test="record.t15r != null">
+        T15R = #{record.t15r,jdbcType=CHAR},
+      </if>
+      <if test="record.t16r != null">
+        T16R = #{record.t16r,jdbcType=CHAR},
+      </if>
+      <if test="record.t17r != null">
+        T17R = #{record.t17r,jdbcType=CHAR},
+      </if>
+      <if test="record.t18r != null">
+        T18R = #{record.t18r,jdbcType=CHAR},
+      </if>
+      <if test="record.t19r != null">
+        T19R = #{record.t19r,jdbcType=CHAR},
+      </if>
+      <if test="record.t20r != null">
+        T20R = #{record.t20r,jdbcType=CHAR},
+      </if>
+      <if test="record.t21r != null">
+        T21R = #{record.t21r,jdbcType=CHAR},
+      </if>
+      <if test="record.t22r != null">
+        T22R = #{record.t22r,jdbcType=CHAR},
+      </if>
+      <if test="record.t23r != null">
+        T23R = #{record.t23r,jdbcType=CHAR},
+      </if>
+      <if test="record.t24r != null">
+        T24R = #{record.t24r,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update maney_act_info
+    set ACT_ID = #{record.actId,jdbcType=BIGINT},
+      GOODS_ID = #{record.goodsId,jdbcType=CHAR},
+      ACT_DATE = #{record.actDate,jdbcType=CHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      T5 = #{record.t5,jdbcType=CHAR},
+      T6 = #{record.t6,jdbcType=CHAR},
+      T7 = #{record.t7,jdbcType=CHAR},
+      T8 = #{record.t8,jdbcType=CHAR},
+      T9 = #{record.t9,jdbcType=CHAR},
+      T10 = #{record.t10,jdbcType=CHAR},
+      T11 = #{record.t11,jdbcType=CHAR},
+      T12 = #{record.t12,jdbcType=CHAR},
+      T13 = #{record.t13,jdbcType=CHAR},
+      T14 = #{record.t14,jdbcType=CHAR},
+      T15 = #{record.t15,jdbcType=CHAR},
+      T16 = #{record.t16,jdbcType=CHAR},
+      T17 = #{record.t17,jdbcType=CHAR},
+      T18 = #{record.t18,jdbcType=CHAR},
+      T19 = #{record.t19,jdbcType=CHAR},
+      T20 = #{record.t20,jdbcType=CHAR},
+      T21 = #{record.t21,jdbcType=CHAR},
+      T22 = #{record.t22,jdbcType=CHAR},
+      T23 = #{record.t23,jdbcType=CHAR},
+      T24 = #{record.t24,jdbcType=CHAR},
+      T5R = #{record.t5r,jdbcType=CHAR},
+      T6R = #{record.t6r,jdbcType=CHAR},
+      T7R = #{record.t7r,jdbcType=CHAR},
+      T8R = #{record.t8r,jdbcType=CHAR},
+      T9R = #{record.t9r,jdbcType=CHAR},
+      T10R = #{record.t10r,jdbcType=CHAR},
+      T11R = #{record.t11r,jdbcType=CHAR},
+      T12R = #{record.t12r,jdbcType=CHAR},
+      T13R = #{record.t13r,jdbcType=CHAR},
+      T14R = #{record.t14r,jdbcType=CHAR},
+      T15R = #{record.t15r,jdbcType=CHAR},
+      T16R = #{record.t16r,jdbcType=CHAR},
+      T17R = #{record.t17r,jdbcType=CHAR},
+      T18R = #{record.t18r,jdbcType=CHAR},
+      T19R = #{record.t19r,jdbcType=CHAR},
+      T20R = #{record.t20r,jdbcType=CHAR},
+      T21R = #{record.t21r,jdbcType=CHAR},
+      T22R = #{record.t22r,jdbcType=CHAR},
+      T23R = #{record.t23r,jdbcType=CHAR},
+      T24R = #{record.t24r,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longwu.maney.model.ActInfo">
+    update maney_act_info
+    <set>
+      <if test="goodsId != null">
+        GOODS_ID = #{goodsId,jdbcType=CHAR},
+      </if>
+      <if test="actDate != null">
+        ACT_DATE = #{actDate,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="t5 != null">
+        T5 = #{t5,jdbcType=CHAR},
+      </if>
+      <if test="t6 != null">
+        T6 = #{t6,jdbcType=CHAR},
+      </if>
+      <if test="t7 != null">
+        T7 = #{t7,jdbcType=CHAR},
+      </if>
+      <if test="t8 != null">
+        T8 = #{t8,jdbcType=CHAR},
+      </if>
+      <if test="t9 != null">
+        T9 = #{t9,jdbcType=CHAR},
+      </if>
+      <if test="t10 != null">
+        T10 = #{t10,jdbcType=CHAR},
+      </if>
+      <if test="t11 != null">
+        T11 = #{t11,jdbcType=CHAR},
+      </if>
+      <if test="t12 != null">
+        T12 = #{t12,jdbcType=CHAR},
+      </if>
+      <if test="t13 != null">
+        T13 = #{t13,jdbcType=CHAR},
+      </if>
+      <if test="t14 != null">
+        T14 = #{t14,jdbcType=CHAR},
+      </if>
+      <if test="t15 != null">
+        T15 = #{t15,jdbcType=CHAR},
+      </if>
+      <if test="t16 != null">
+        T16 = #{t16,jdbcType=CHAR},
+      </if>
+      <if test="t17 != null">
+        T17 = #{t17,jdbcType=CHAR},
+      </if>
+      <if test="t18 != null">
+        T18 = #{t18,jdbcType=CHAR},
+      </if>
+      <if test="t19 != null">
+        T19 = #{t19,jdbcType=CHAR},
+      </if>
+      <if test="t20 != null">
+        T20 = #{t20,jdbcType=CHAR},
+      </if>
+      <if test="t21 != null">
+        T21 = #{t21,jdbcType=CHAR},
+      </if>
+      <if test="t22 != null">
+        T22 = #{t22,jdbcType=CHAR},
+      </if>
+      <if test="t23 != null">
+        T23 = #{t23,jdbcType=CHAR},
+      </if>
+      <if test="t24 != null">
+        T24 = #{t24,jdbcType=CHAR},
+      </if>
+      <if test="t5r != null">
+        T5R = #{t5r,jdbcType=CHAR},
+      </if>
+      <if test="t6r != null">
+        T6R = #{t6r,jdbcType=CHAR},
+      </if>
+      <if test="t7r != null">
+        T7R = #{t7r,jdbcType=CHAR},
+      </if>
+      <if test="t8r != null">
+        T8R = #{t8r,jdbcType=CHAR},
+      </if>
+      <if test="t9r != null">
+        T9R = #{t9r,jdbcType=CHAR},
+      </if>
+      <if test="t10r != null">
+        T10R = #{t10r,jdbcType=CHAR},
+      </if>
+      <if test="t11r != null">
+        T11R = #{t11r,jdbcType=CHAR},
+      </if>
+      <if test="t12r != null">
+        T12R = #{t12r,jdbcType=CHAR},
+      </if>
+      <if test="t13r != null">
+        T13R = #{t13r,jdbcType=CHAR},
+      </if>
+      <if test="t14r != null">
+        T14R = #{t14r,jdbcType=CHAR},
+      </if>
+      <if test="t15r != null">
+        T15R = #{t15r,jdbcType=CHAR},
+      </if>
+      <if test="t16r != null">
+        T16R = #{t16r,jdbcType=CHAR},
+      </if>
+      <if test="t17r != null">
+        T17R = #{t17r,jdbcType=CHAR},
+      </if>
+      <if test="t18r != null">
+        T18R = #{t18r,jdbcType=CHAR},
+      </if>
+      <if test="t19r != null">
+        T19R = #{t19r,jdbcType=CHAR},
+      </if>
+      <if test="t20r != null">
+        T20R = #{t20r,jdbcType=CHAR},
+      </if>
+      <if test="t21r != null">
+        T21R = #{t21r,jdbcType=CHAR},
+      </if>
+      <if test="t22r != null">
+        T22R = #{t22r,jdbcType=CHAR},
+      </if>
+      <if test="t23r != null">
+        T23R = #{t23r,jdbcType=CHAR},
+      </if>
+      <if test="t24r != null">
+        T24R = #{t24r,jdbcType=CHAR},
+      </if>
+    </set>
+    where ACT_ID = #{actId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longwu.maney.model.ActInfo">
+    update maney_act_info
+    set GOODS_ID = #{goodsId,jdbcType=CHAR},
+      ACT_DATE = #{actDate,jdbcType=CHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      T5 = #{t5,jdbcType=CHAR},
+      T6 = #{t6,jdbcType=CHAR},
+      T7 = #{t7,jdbcType=CHAR},
+      T8 = #{t8,jdbcType=CHAR},
+      T9 = #{t9,jdbcType=CHAR},
+      T10 = #{t10,jdbcType=CHAR},
+      T11 = #{t11,jdbcType=CHAR},
+      T12 = #{t12,jdbcType=CHAR},
+      T13 = #{t13,jdbcType=CHAR},
+      T14 = #{t14,jdbcType=CHAR},
+      T15 = #{t15,jdbcType=CHAR},
+      T16 = #{t16,jdbcType=CHAR},
+      T17 = #{t17,jdbcType=CHAR},
+      T18 = #{t18,jdbcType=CHAR},
+      T19 = #{t19,jdbcType=CHAR},
+      T20 = #{t20,jdbcType=CHAR},
+      T21 = #{t21,jdbcType=CHAR},
+      T22 = #{t22,jdbcType=CHAR},
+      T23 = #{t23,jdbcType=CHAR},
+      T24 = #{t24,jdbcType=CHAR},
+      T5R = #{t5r,jdbcType=CHAR},
+      T6R = #{t6r,jdbcType=CHAR},
+      T7R = #{t7r,jdbcType=CHAR},
+      T8R = #{t8r,jdbcType=CHAR},
+      T9R = #{t9r,jdbcType=CHAR},
+      T10R = #{t10r,jdbcType=CHAR},
+      T11R = #{t11r,jdbcType=CHAR},
+      T12R = #{t12r,jdbcType=CHAR},
+      T13R = #{t13r,jdbcType=CHAR},
+      T14R = #{t14r,jdbcType=CHAR},
+      T15R = #{t15r,jdbcType=CHAR},
+      T16R = #{t16r,jdbcType=CHAR},
+      T17R = #{t17r,jdbcType=CHAR},
+      T18R = #{t18r,jdbcType=CHAR},
+      T19R = #{t19r,jdbcType=CHAR},
+      T20R = #{t20r,jdbcType=CHAR},
+      T21R = #{t21r,jdbcType=CHAR},
+      T22R = #{t22r,jdbcType=CHAR},
+      T23R = #{t23r,jdbcType=CHAR},
+      T24R = #{t24r,jdbcType=CHAR}
+    where ACT_ID = #{actId,jdbcType=BIGINT}
+  </update>
+</mapper>

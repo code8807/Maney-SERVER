@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longwu.maney.dao.MerCoachMapperMapper">
+  <resultMap id="BaseResultMap" type="com.longwu.maney.model.MerCoachMapper">
+    <id column="MAPPER_ID" jdbcType="CHAR" property="mapperId" />
+    <result column="MER_ID" jdbcType="CHAR" property="merId" />
+    <result column="COACH_ID" jdbcType="CHAR" property="coachId" />
+    <result column="MAPPER_STAT" jdbcType="CHAR" property="mapperStat" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="CHAR" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    MAPPER_ID, MER_ID, COACH_ID, MAPPER_STAT, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.longwu.maney.model.MerCoachMapperExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from maney_mer_coach_mapper
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from maney_mer_coach_mapper
+    where MAPPER_ID = #{mapperId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from maney_mer_coach_mapper
+    where MAPPER_ID = #{mapperId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.longwu.maney.model.MerCoachMapperExample">
+    delete from maney_mer_coach_mapper
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.longwu.maney.model.MerCoachMapper">
+    insert into maney_mer_coach_mapper (MAPPER_ID, MER_ID, COACH_ID, 
+      MAPPER_STAT, CREATE_TIME, UPDATE_TIME
+      )
+    values (#{mapperId,jdbcType=CHAR}, #{merId,jdbcType=CHAR}, #{coachId,jdbcType=CHAR}, 
+      #{mapperStat,jdbcType=CHAR}, #{createTime,jdbcType=CHAR}, #{updateTime,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.longwu.maney.model.MerCoachMapper">
+    insert into maney_mer_coach_mapper
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mapperId != null">
+        MAPPER_ID,
+      </if>
+      <if test="merId != null">
+        MER_ID,
+      </if>
+      <if test="coachId != null">
+        COACH_ID,
+      </if>
+      <if test="mapperStat != null">
+        MAPPER_STAT,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mapperId != null">
+        #{mapperId,jdbcType=CHAR},
+      </if>
+      <if test="merId != null">
+        #{merId,jdbcType=CHAR},
+      </if>
+      <if test="coachId != null">
+        #{coachId,jdbcType=CHAR},
+      </if>
+      <if test="mapperStat != null">
+        #{mapperStat,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.longwu.maney.model.MerCoachMapperExample" resultType="java.lang.Long">
+    select count(*) from maney_mer_coach_mapper
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update maney_mer_coach_mapper
+    <set>
+      <if test="record.mapperId != null">
+        MAPPER_ID = #{record.mapperId,jdbcType=CHAR},
+      </if>
+      <if test="record.merId != null">
+        MER_ID = #{record.merId,jdbcType=CHAR},
+      </if>
+      <if test="record.coachId != null">
+        COACH_ID = #{record.coachId,jdbcType=CHAR},
+      </if>
+      <if test="record.mapperStat != null">
+        MAPPER_STAT = #{record.mapperStat,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update maney_mer_coach_mapper
+    set MAPPER_ID = #{record.mapperId,jdbcType=CHAR},
+      MER_ID = #{record.merId,jdbcType=CHAR},
+      COACH_ID = #{record.coachId,jdbcType=CHAR},
+      MAPPER_STAT = #{record.mapperStat,jdbcType=CHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longwu.maney.model.MerCoachMapper">
+    update maney_mer_coach_mapper
+    <set>
+      <if test="merId != null">
+        MER_ID = #{merId,jdbcType=CHAR},
+      </if>
+      <if test="coachId != null">
+        COACH_ID = #{coachId,jdbcType=CHAR},
+      </if>
+      <if test="mapperStat != null">
+        MAPPER_STAT = #{mapperStat,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      </if>
+    </set>
+    where MAPPER_ID = #{mapperId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longwu.maney.model.MerCoachMapper">
+    update maney_mer_coach_mapper
+    set MER_ID = #{merId,jdbcType=CHAR},
+      COACH_ID = #{coachId,jdbcType=CHAR},
+      MAPPER_STAT = #{mapperStat,jdbcType=CHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR}
+    where MAPPER_ID = #{mapperId,jdbcType=CHAR}
+  </update>
+</mapper>

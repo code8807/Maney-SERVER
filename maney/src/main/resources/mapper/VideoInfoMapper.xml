@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longwu.maney.dao.VideoInfoMapper">
+  <resultMap id="BaseResultMap" type="com.longwu.maney.model.VideoInfo">
+    <id column="VIDEO_ID" jdbcType="BIGINT" property="videoId" />
+    <result column="VIDEO_NAME" jdbcType="VARCHAR" property="videoName" />
+    <result column="VIDEO_URL" jdbcType="VARCHAR" property="videoUrl" />
+    <result column="VIDEO_THU" jdbcType="VARCHAR" property="videoThu" />
+    <result column="WATCH_NUM" jdbcType="VARCHAR" property="watchNum" />
+    <result column="LIKE_NUM" jdbcType="VARCHAR" property="likeNum" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    VIDEO_ID, VIDEO_NAME, VIDEO_URL, VIDEO_THU, WATCH_NUM, LIKE_NUM
+  </sql>
+  <select id="selectByExample" parameterType="com.longwu.maney.model.VideoInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from maney_video_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from maney_video_info
+    where VIDEO_ID = #{videoId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from maney_video_info
+    where VIDEO_ID = #{videoId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.longwu.maney.model.VideoInfoExample">
+    delete from maney_video_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.longwu.maney.model.VideoInfo">
+    insert into maney_video_info (VIDEO_ID, VIDEO_NAME, VIDEO_URL, 
+      VIDEO_THU, WATCH_NUM, LIKE_NUM
+      )
+    values (#{videoId,jdbcType=BIGINT}, #{videoName,jdbcType=VARCHAR}, #{videoUrl,jdbcType=VARCHAR}, 
+      #{videoThu,jdbcType=VARCHAR}, #{watchNum,jdbcType=VARCHAR}, #{likeNum,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.longwu.maney.model.VideoInfo">
+    insert into maney_video_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="videoId != null">
+        VIDEO_ID,
+      </if>
+      <if test="videoName != null">
+        VIDEO_NAME,
+      </if>
+      <if test="videoUrl != null">
+        VIDEO_URL,
+      </if>
+      <if test="videoThu != null">
+        VIDEO_THU,
+      </if>
+      <if test="watchNum != null">
+        WATCH_NUM,
+      </if>
+      <if test="likeNum != null">
+        LIKE_NUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="videoId != null">
+        #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="videoName != null">
+        #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null">
+        #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoThu != null">
+        #{videoThu,jdbcType=VARCHAR},
+      </if>
+      <if test="watchNum != null">
+        #{watchNum,jdbcType=VARCHAR},
+      </if>
+      <if test="likeNum != null">
+        #{likeNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.longwu.maney.model.VideoInfoExample" resultType="java.lang.Long">
+    select count(*) from maney_video_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update maney_video_info
+    <set>
+      <if test="record.videoId != null">
+        VIDEO_ID = #{record.videoId,jdbcType=BIGINT},
+      </if>
+      <if test="record.videoName != null">
+        VIDEO_NAME = #{record.videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoUrl != null">
+        VIDEO_URL = #{record.videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoThu != null">
+        VIDEO_THU = #{record.videoThu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.watchNum != null">
+        WATCH_NUM = #{record.watchNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.likeNum != null">
+        LIKE_NUM = #{record.likeNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update maney_video_info
+    set VIDEO_ID = #{record.videoId,jdbcType=BIGINT},
+      VIDEO_NAME = #{record.videoName,jdbcType=VARCHAR},
+      VIDEO_URL = #{record.videoUrl,jdbcType=VARCHAR},
+      VIDEO_THU = #{record.videoThu,jdbcType=VARCHAR},
+      WATCH_NUM = #{record.watchNum,jdbcType=VARCHAR},
+      LIKE_NUM = #{record.likeNum,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longwu.maney.model.VideoInfo">
+    update maney_video_info
+    <set>
+      <if test="videoName != null">
+        VIDEO_NAME = #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null">
+        VIDEO_URL = #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoThu != null">
+        VIDEO_THU = #{videoThu,jdbcType=VARCHAR},
+      </if>
+      <if test="watchNum != null">
+        WATCH_NUM = #{watchNum,jdbcType=VARCHAR},
+      </if>
+      <if test="likeNum != null">
+        LIKE_NUM = #{likeNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where VIDEO_ID = #{videoId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longwu.maney.model.VideoInfo">
+    update maney_video_info
+    set VIDEO_NAME = #{videoName,jdbcType=VARCHAR},
+      VIDEO_URL = #{videoUrl,jdbcType=VARCHAR},
+      VIDEO_THU = #{videoThu,jdbcType=VARCHAR},
+      WATCH_NUM = #{watchNum,jdbcType=VARCHAR},
+      LIKE_NUM = #{likeNum,jdbcType=VARCHAR}
+    where VIDEO_ID = #{videoId,jdbcType=BIGINT}
+  </update>
+</mapper>

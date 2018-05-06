@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longwu.maney.dao.SystemParamMapper">
+  <resultMap id="BaseResultMap" type="com.longwu.maney.model.SystemParam">
+    <id column="PARAM_ID" jdbcType="INTEGER" property="paramId" />
+    <result column="PARAM_STAT" jdbcType="CHAR" property="paramStat" />
+    <result column="PARAM_VALUE" jdbcType="VARCHAR" property="paramValue" />
+    <result column="PARAM_INI" jdbcType="VARCHAR" property="paramIni" />
+    <result column="PARAM_REM" jdbcType="VARCHAR" property="paramRem" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="CHAR" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PARAM_ID, PARAM_STAT, PARAM_VALUE, PARAM_INI, PARAM_REM, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.longwu.maney.model.SystemParamExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from maney_system_param
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from maney_system_param
+    where PARAM_ID = #{paramId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from maney_system_param
+    where PARAM_ID = #{paramId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.longwu.maney.model.SystemParamExample">
+    delete from maney_system_param
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.longwu.maney.model.SystemParam">
+    insert into maney_system_param (PARAM_ID, PARAM_STAT, PARAM_VALUE, 
+      PARAM_INI, PARAM_REM, CREATE_TIME, 
+      UPDATE_TIME)
+    values (#{paramId,jdbcType=INTEGER}, #{paramStat,jdbcType=CHAR}, #{paramValue,jdbcType=VARCHAR}, 
+      #{paramIni,jdbcType=VARCHAR}, #{paramRem,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, 
+      #{updateTime,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.longwu.maney.model.SystemParam">
+    insert into maney_system_param
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="paramId != null">
+        PARAM_ID,
+      </if>
+      <if test="paramStat != null">
+        PARAM_STAT,
+      </if>
+      <if test="paramValue != null">
+        PARAM_VALUE,
+      </if>
+      <if test="paramIni != null">
+        PARAM_INI,
+      </if>
+      <if test="paramRem != null">
+        PARAM_REM,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="paramId != null">
+        #{paramId,jdbcType=INTEGER},
+      </if>
+      <if test="paramStat != null">
+        #{paramStat,jdbcType=CHAR},
+      </if>
+      <if test="paramValue != null">
+        #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paramIni != null">
+        #{paramIni,jdbcType=VARCHAR},
+      </if>
+      <if test="paramRem != null">
+        #{paramRem,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.longwu.maney.model.SystemParamExample" resultType="java.lang.Long">
+    select count(*) from maney_system_param
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update maney_system_param
+    <set>
+      <if test="record.paramId != null">
+        PARAM_ID = #{record.paramId,jdbcType=INTEGER},
+      </if>
+      <if test="record.paramStat != null">
+        PARAM_STAT = #{record.paramStat,jdbcType=CHAR},
+      </if>
+      <if test="record.paramValue != null">
+        PARAM_VALUE = #{record.paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramIni != null">
+        PARAM_INI = #{record.paramIni,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramRem != null">
+        PARAM_REM = #{record.paramRem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update maney_system_param
+    set PARAM_ID = #{record.paramId,jdbcType=INTEGER},
+      PARAM_STAT = #{record.paramStat,jdbcType=CHAR},
+      PARAM_VALUE = #{record.paramValue,jdbcType=VARCHAR},
+      PARAM_INI = #{record.paramIni,jdbcType=VARCHAR},
+      PARAM_REM = #{record.paramRem,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longwu.maney.model.SystemParam">
+    update maney_system_param
+    <set>
+      <if test="paramStat != null">
+        PARAM_STAT = #{paramStat,jdbcType=CHAR},
+      </if>
+      <if test="paramValue != null">
+        PARAM_VALUE = #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paramIni != null">
+        PARAM_INI = #{paramIni,jdbcType=VARCHAR},
+      </if>
+      <if test="paramRem != null">
+        PARAM_REM = #{paramRem,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      </if>
+    </set>
+    where PARAM_ID = #{paramId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longwu.maney.model.SystemParam">
+    update maney_system_param
+    set PARAM_STAT = #{paramStat,jdbcType=CHAR},
+      PARAM_VALUE = #{paramValue,jdbcType=VARCHAR},
+      PARAM_INI = #{paramIni,jdbcType=VARCHAR},
+      PARAM_REM = #{paramRem,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR}
+    where PARAM_ID = #{paramId,jdbcType=INTEGER}
+  </update>
+</mapper>

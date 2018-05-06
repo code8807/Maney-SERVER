@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longwu.maney.dao.CoachInfoMapper">
+  <resultMap id="BaseResultMap" type="com.longwu.maney.model.CoachInfo">
+    <id column="COACH_ID" jdbcType="BIGINT" property="coachId" />
+    <result column="COACH_NAME" jdbcType="VARCHAR" property="coachName" />
+    <result column="COACH_MOB" jdbcType="CHAR" property="coachMob" />
+    <result column="COACH_AGE" jdbcType="VARCHAR" property="coachAge" />
+    <result column="COACH_SEX" jdbcType="CHAR" property="coachSex" />
+    <result column="COACH_NICKNAME" jdbcType="VARCHAR" property="coachNickname" />
+    <result column="COACH_EDU" jdbcType="CHAR" property="coachEdu" />
+    <result column="COACH_LEVEL" jdbcType="CHAR" property="coachLevel" />
+    <result column="COACH_TYPE" jdbcType="CHAR" property="coachType" />
+    <result column="COACH_STAT" jdbcType="CHAR" property="coachStat" />
+    <result column="MAPPER_MANEY" jdbcType="CHAR" property="mapperManey" />
+    <result column="RES_ONE" jdbcType="VARCHAR" property="resOne" />
+    <result column="RES_TWO" jdbcType="VARCHAR" property="resTwo" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="CHAR" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.longwu.maney.model.CoachInfoWithBLOBs">
+    <result column="GOOD_AT" jdbcType="LONGVARCHAR" property="goodAt" />
+    <result column="COACH_ABOUT" jdbcType="LONGVARCHAR" property="coachAbout" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    COACH_ID, COACH_NAME, COACH_MOB, COACH_AGE, COACH_SEX, COACH_NICKNAME, COACH_EDU, 
+    COACH_LEVEL, COACH_TYPE, COACH_STAT, MAPPER_MANEY, RES_ONE, RES_TWO, CREATE_TIME, 
+    UPDATE_TIME
+  </sql>
+  <sql id="Blob_Column_List">
+    GOOD_AT, COACH_ABOUT
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.longwu.maney.model.CoachInfoExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from maney_coach_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.longwu.maney.model.CoachInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from maney_coach_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from maney_coach_info
+    where COACH_ID = #{coachId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from maney_coach_info
+    where COACH_ID = #{coachId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.longwu.maney.model.CoachInfoExample">
+    delete from maney_coach_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.longwu.maney.model.CoachInfoWithBLOBs">
+    insert into maney_coach_info (COACH_ID, COACH_NAME, COACH_MOB, 
+      COACH_AGE, COACH_SEX, COACH_NICKNAME, 
+      COACH_EDU, COACH_LEVEL, COACH_TYPE, 
+      COACH_STAT, MAPPER_MANEY, RES_ONE, 
+      RES_TWO, CREATE_TIME, UPDATE_TIME, 
+      GOOD_AT, COACH_ABOUT)
+    values (#{coachId,jdbcType=BIGINT}, #{coachName,jdbcType=VARCHAR}, #{coachMob,jdbcType=CHAR}, 
+      #{coachAge,jdbcType=VARCHAR}, #{coachSex,jdbcType=CHAR}, #{coachNickname,jdbcType=VARCHAR}, 
+      #{coachEdu,jdbcType=CHAR}, #{coachLevel,jdbcType=CHAR}, #{coachType,jdbcType=CHAR}, 
+      #{coachStat,jdbcType=CHAR}, #{mapperManey,jdbcType=CHAR}, #{resOne,jdbcType=VARCHAR}, 
+      #{resTwo,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, #{updateTime,jdbcType=CHAR}, 
+      #{goodAt,jdbcType=LONGVARCHAR}, #{coachAbout,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.longwu.maney.model.CoachInfoWithBLOBs">
+    insert into maney_coach_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="coachId != null">
+        COACH_ID,
+      </if>
+      <if test="coachName != null">
+        COACH_NAME,
+      </if>
+      <if test="coachMob != null">
+        COACH_MOB,
+      </if>
+      <if test="coachAge != null">
+        COACH_AGE,
+      </if>
+      <if test="coachSex != null">
+        COACH_SEX,
+      </if>
+      <if test="coachNickname != null">
+        COACH_NICKNAME,
+      </if>
+      <if test="coachEdu != null">
+        COACH_EDU,
+      </if>
+      <if test="coachLevel != null">
+        COACH_LEVEL,
+      </if>
+      <if test="coachType != null">
+        COACH_TYPE,
+      </if>
+      <if test="coachStat != null">
+        COACH_STAT,
+      </if>
+      <if test="mapperManey != null">
+        MAPPER_MANEY,
+      </if>
+      <if test="resOne != null">
+        RES_ONE,
+      </if>
+      <if test="resTwo != null">
+        RES_TWO,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="goodAt != null">
+        GOOD_AT,
+      </if>
+      <if test="coachAbout != null">
+        COACH_ABOUT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="coachId != null">
+        #{coachId,jdbcType=BIGINT},
+      </if>
+      <if test="coachName != null">
+        #{coachName,jdbcType=VARCHAR},
+      </if>
+      <if test="coachMob != null">
+        #{coachMob,jdbcType=CHAR},
+      </if>
+      <if test="coachAge != null">
+        #{coachAge,jdbcType=VARCHAR},
+      </if>
+      <if test="coachSex != null">
+        #{coachSex,jdbcType=CHAR},
+      </if>
+      <if test="coachNickname != null">
+        #{coachNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="coachEdu != null">
+        #{coachEdu,jdbcType=CHAR},
+      </if>
+      <if test="coachLevel != null">
+        #{coachLevel,jdbcType=CHAR},
+      </if>
+      <if test="coachType != null">
+        #{coachType,jdbcType=CHAR},
+      </if>
+      <if test="coachStat != null">
+        #{coachStat,jdbcType=CHAR},
+      </if>
+      <if test="mapperManey != null">
+        #{mapperManey,jdbcType=CHAR},
+      </if>
+      <if test="resOne != null">
+        #{resOne,jdbcType=VARCHAR},
+      </if>
+      <if test="resTwo != null">
+        #{resTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="goodAt != null">
+        #{goodAt,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="coachAbout != null">
+        #{coachAbout,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.longwu.maney.model.CoachInfoExample" resultType="java.lang.Long">
+    select count(*) from maney_coach_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update maney_coach_info
+    <set>
+      <if test="record.coachId != null">
+        COACH_ID = #{record.coachId,jdbcType=BIGINT},
+      </if>
+      <if test="record.coachName != null">
+        COACH_NAME = #{record.coachName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coachMob != null">
+        COACH_MOB = #{record.coachMob,jdbcType=CHAR},
+      </if>
+      <if test="record.coachAge != null">
+        COACH_AGE = #{record.coachAge,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coachSex != null">
+        COACH_SEX = #{record.coachSex,jdbcType=CHAR},
+      </if>
+      <if test="record.coachNickname != null">
+        COACH_NICKNAME = #{record.coachNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coachEdu != null">
+        COACH_EDU = #{record.coachEdu,jdbcType=CHAR},
+      </if>
+      <if test="record.coachLevel != null">
+        COACH_LEVEL = #{record.coachLevel,jdbcType=CHAR},
+      </if>
+      <if test="record.coachType != null">
+        COACH_TYPE = #{record.coachType,jdbcType=CHAR},
+      </if>
+      <if test="record.coachStat != null">
+        COACH_STAT = #{record.coachStat,jdbcType=CHAR},
+      </if>
+      <if test="record.mapperManey != null">
+        MAPPER_MANEY = #{record.mapperManey,jdbcType=CHAR},
+      </if>
+      <if test="record.resOne != null">
+        RES_ONE = #{record.resOne,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resTwo != null">
+        RES_TWO = #{record.resTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      </if>
+      <if test="record.goodAt != null">
+        GOOD_AT = #{record.goodAt,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.coachAbout != null">
+        COACH_ABOUT = #{record.coachAbout,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update maney_coach_info
+    set COACH_ID = #{record.coachId,jdbcType=BIGINT},
+      COACH_NAME = #{record.coachName,jdbcType=VARCHAR},
+      COACH_MOB = #{record.coachMob,jdbcType=CHAR},
+      COACH_AGE = #{record.coachAge,jdbcType=VARCHAR},
+      COACH_SEX = #{record.coachSex,jdbcType=CHAR},
+      COACH_NICKNAME = #{record.coachNickname,jdbcType=VARCHAR},
+      COACH_EDU = #{record.coachEdu,jdbcType=CHAR},
+      COACH_LEVEL = #{record.coachLevel,jdbcType=CHAR},
+      COACH_TYPE = #{record.coachType,jdbcType=CHAR},
+      COACH_STAT = #{record.coachStat,jdbcType=CHAR},
+      MAPPER_MANEY = #{record.mapperManey,jdbcType=CHAR},
+      RES_ONE = #{record.resOne,jdbcType=VARCHAR},
+      RES_TWO = #{record.resTwo,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      GOOD_AT = #{record.goodAt,jdbcType=LONGVARCHAR},
+      COACH_ABOUT = #{record.coachAbout,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update maney_coach_info
+    set COACH_ID = #{record.coachId,jdbcType=BIGINT},
+      COACH_NAME = #{record.coachName,jdbcType=VARCHAR},
+      COACH_MOB = #{record.coachMob,jdbcType=CHAR},
+      COACH_AGE = #{record.coachAge,jdbcType=VARCHAR},
+      COACH_SEX = #{record.coachSex,jdbcType=CHAR},
+      COACH_NICKNAME = #{record.coachNickname,jdbcType=VARCHAR},
+      COACH_EDU = #{record.coachEdu,jdbcType=CHAR},
+      COACH_LEVEL = #{record.coachLevel,jdbcType=CHAR},
+      COACH_TYPE = #{record.coachType,jdbcType=CHAR},
+      COACH_STAT = #{record.coachStat,jdbcType=CHAR},
+      MAPPER_MANEY = #{record.mapperManey,jdbcType=CHAR},
+      RES_ONE = #{record.resOne,jdbcType=VARCHAR},
+      RES_TWO = #{record.resTwo,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longwu.maney.model.CoachInfoWithBLOBs">
+    update maney_coach_info
+    <set>
+      <if test="coachName != null">
+        COACH_NAME = #{coachName,jdbcType=VARCHAR},
+      </if>
+      <if test="coachMob != null">
+        COACH_MOB = #{coachMob,jdbcType=CHAR},
+      </if>
+      <if test="coachAge != null">
+        COACH_AGE = #{coachAge,jdbcType=VARCHAR},
+      </if>
+      <if test="coachSex != null">
+        COACH_SEX = #{coachSex,jdbcType=CHAR},
+      </if>
+      <if test="coachNickname != null">
+        COACH_NICKNAME = #{coachNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="coachEdu != null">
+        COACH_EDU = #{coachEdu,jdbcType=CHAR},
+      </if>
+      <if test="coachLevel != null">
+        COACH_LEVEL = #{coachLevel,jdbcType=CHAR},
+      </if>
+      <if test="coachType != null">
+        COACH_TYPE = #{coachType,jdbcType=CHAR},
+      </if>
+      <if test="coachStat != null">
+        COACH_STAT = #{coachStat,jdbcType=CHAR},
+      </if>
+      <if test="mapperManey != null">
+        MAPPER_MANEY = #{mapperManey,jdbcType=CHAR},
+      </if>
+      <if test="resOne != null">
+        RES_ONE = #{resOne,jdbcType=VARCHAR},
+      </if>
+      <if test="resTwo != null">
+        RES_TWO = #{resTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="goodAt != null">
+        GOOD_AT = #{goodAt,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="coachAbout != null">
+        COACH_ABOUT = #{coachAbout,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where COACH_ID = #{coachId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.longwu.maney.model.CoachInfoWithBLOBs">
+    update maney_coach_info
+    set COACH_NAME = #{coachName,jdbcType=VARCHAR},
+      COACH_MOB = #{coachMob,jdbcType=CHAR},
+      COACH_AGE = #{coachAge,jdbcType=VARCHAR},
+      COACH_SEX = #{coachSex,jdbcType=CHAR},
+      COACH_NICKNAME = #{coachNickname,jdbcType=VARCHAR},
+      COACH_EDU = #{coachEdu,jdbcType=CHAR},
+      COACH_LEVEL = #{coachLevel,jdbcType=CHAR},
+      COACH_TYPE = #{coachType,jdbcType=CHAR},
+      COACH_STAT = #{coachStat,jdbcType=CHAR},
+      MAPPER_MANEY = #{mapperManey,jdbcType=CHAR},
+      RES_ONE = #{resOne,jdbcType=VARCHAR},
+      RES_TWO = #{resTwo,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      GOOD_AT = #{goodAt,jdbcType=LONGVARCHAR},
+      COACH_ABOUT = #{coachAbout,jdbcType=LONGVARCHAR}
+    where COACH_ID = #{coachId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longwu.maney.model.CoachInfo">
+    update maney_coach_info
+    set COACH_NAME = #{coachName,jdbcType=VARCHAR},
+      COACH_MOB = #{coachMob,jdbcType=CHAR},
+      COACH_AGE = #{coachAge,jdbcType=VARCHAR},
+      COACH_SEX = #{coachSex,jdbcType=CHAR},
+      COACH_NICKNAME = #{coachNickname,jdbcType=VARCHAR},
+      COACH_EDU = #{coachEdu,jdbcType=CHAR},
+      COACH_LEVEL = #{coachLevel,jdbcType=CHAR},
+      COACH_TYPE = #{coachType,jdbcType=CHAR},
+      COACH_STAT = #{coachStat,jdbcType=CHAR},
+      MAPPER_MANEY = #{mapperManey,jdbcType=CHAR},
+      RES_ONE = #{resOne,jdbcType=VARCHAR},
+      RES_TWO = #{resTwo,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR}
+    where COACH_ID = #{coachId,jdbcType=BIGINT}
+  </update>
+</mapper>

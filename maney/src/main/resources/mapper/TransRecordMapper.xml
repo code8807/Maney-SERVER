@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longwu.maney.dao.TransRecordMapper">
+  <resultMap id="BaseResultMap" type="com.longwu.maney.model.TransRecord">
+    <id column="ORDER_ID" jdbcType="BIGINT" property="orderId" />
+    <result column="PAY_ID" jdbcType="CHAR" property="payId" />
+    <result column="REC_ID" jdbcType="VARCHAR" property="recId" />
+    <result column="MANEY_AMOUNT" jdbcType="DECIMAL" property="maneyAmount" />
+    <result column="GOODS_CODE" jdbcType="CHAR" property="goodsCode" />
+    <result column="PAY_REM" jdbcType="VARCHAR" property="payRem" />
+    <result column="GOODS_QUA" jdbcType="VARCHAR" property="goodsQua" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="CHAR" property="updateTime" />
+    <result column="PAY_STAT" jdbcType="CHAR" property="payStat" />
+    <result column="PAY_CHL" jdbcType="VARCHAR" property="payChl" />
+    <result column="PAY_ADDR" jdbcType="VARCHAR" property="payAddr" />
+    <result column="PAY_ORDERID" jdbcType="VARCHAR" property="payOrderid" />
+    <result column="MER_NAME" jdbcType="VARCHAR" property="merName" />
+    <result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName" />
+    <result column="BTL_ID" jdbcType="CHAR" property="btlId" />
+    <result column="RES_ONE" jdbcType="VARCHAR" property="resOne" />
+    <result column="RES_TWO" jdbcType="VARCHAR" property="resTwo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ORDER_ID, PAY_ID, REC_ID, MANEY_AMOUNT, GOODS_CODE, PAY_REM, GOODS_QUA, CREATE_TIME, 
+    UPDATE_TIME, PAY_STAT, PAY_CHL, PAY_ADDR, PAY_ORDERID, MER_NAME, GOODS_NAME, BTL_ID, 
+    RES_ONE, RES_TWO
+  </sql>
+  <select id="selectByExample" parameterType="com.longwu.maney.model.TransRecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from maney_trans_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from maney_trans_record
+    where ORDER_ID = #{orderId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from maney_trans_record
+    where ORDER_ID = #{orderId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.longwu.maney.model.TransRecordExample">
+    delete from maney_trans_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.longwu.maney.model.TransRecord">
+    insert into maney_trans_record (ORDER_ID, PAY_ID, REC_ID, 
+      MANEY_AMOUNT, GOODS_CODE, PAY_REM, 
+      GOODS_QUA, CREATE_TIME, UPDATE_TIME, 
+      PAY_STAT, PAY_CHL, PAY_ADDR, 
+      PAY_ORDERID, MER_NAME, GOODS_NAME, 
+      BTL_ID, RES_ONE, RES_TWO)
+    values (#{orderId,jdbcType=BIGINT}, #{payId,jdbcType=CHAR}, #{recId,jdbcType=VARCHAR}, 
+      #{maneyAmount,jdbcType=DECIMAL}, #{goodsCode,jdbcType=CHAR}, #{payRem,jdbcType=VARCHAR}, 
+      #{goodsQua,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, #{updateTime,jdbcType=CHAR}, 
+      #{payStat,jdbcType=CHAR}, #{payChl,jdbcType=VARCHAR}, #{payAddr,jdbcType=VARCHAR}, 
+      #{payOrderid,jdbcType=VARCHAR}, #{merName,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
+      #{btlId,jdbcType=CHAR}, #{resOne,jdbcType=VARCHAR}, #{resTwo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.longwu.maney.model.TransRecord">
+    insert into maney_trans_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="payId != null">
+        PAY_ID,
+      </if>
+      <if test="recId != null">
+        REC_ID,
+      </if>
+      <if test="maneyAmount != null">
+        MANEY_AMOUNT,
+      </if>
+      <if test="goodsCode != null">
+        GOODS_CODE,
+      </if>
+      <if test="payRem != null">
+        PAY_REM,
+      </if>
+      <if test="goodsQua != null">
+        GOODS_QUA,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="payStat != null">
+        PAY_STAT,
+      </if>
+      <if test="payChl != null">
+        PAY_CHL,
+      </if>
+      <if test="payAddr != null">
+        PAY_ADDR,
+      </if>
+      <if test="payOrderid != null">
+        PAY_ORDERID,
+      </if>
+      <if test="merName != null">
+        MER_NAME,
+      </if>
+      <if test="goodsName != null">
+        GOODS_NAME,
+      </if>
+      <if test="btlId != null">
+        BTL_ID,
+      </if>
+      <if test="resOne != null">
+        RES_ONE,
+      </if>
+      <if test="resTwo != null">
+        RES_TWO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="payId != null">
+        #{payId,jdbcType=CHAR},
+      </if>
+      <if test="recId != null">
+        #{recId,jdbcType=VARCHAR},
+      </if>
+      <if test="maneyAmount != null">
+        #{maneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsCode != null">
+        #{goodsCode,jdbcType=CHAR},
+      </if>
+      <if test="payRem != null">
+        #{payRem,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsQua != null">
+        #{goodsQua,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="payStat != null">
+        #{payStat,jdbcType=CHAR},
+      </if>
+      <if test="payChl != null">
+        #{payChl,jdbcType=VARCHAR},
+      </if>
+      <if test="payAddr != null">
+        #{payAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="payOrderid != null">
+        #{payOrderid,jdbcType=VARCHAR},
+      </if>
+      <if test="merName != null">
+        #{merName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="btlId != null">
+        #{btlId,jdbcType=CHAR},
+      </if>
+      <if test="resOne != null">
+        #{resOne,jdbcType=VARCHAR},
+      </if>
+      <if test="resTwo != null">
+        #{resTwo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.longwu.maney.model.TransRecordExample" resultType="java.lang.Long">
+    select count(*) from maney_trans_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update maney_trans_record
+    <set>
+      <if test="record.orderId != null">
+        ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.payId != null">
+        PAY_ID = #{record.payId,jdbcType=CHAR},
+      </if>
+      <if test="record.recId != null">
+        REC_ID = #{record.recId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maneyAmount != null">
+        MANEY_AMOUNT = #{record.maneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.goodsCode != null">
+        GOODS_CODE = #{record.goodsCode,jdbcType=CHAR},
+      </if>
+      <if test="record.payRem != null">
+        PAY_REM = #{record.payRem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsQua != null">
+        GOODS_QUA = #{record.goodsQua,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      </if>
+      <if test="record.payStat != null">
+        PAY_STAT = #{record.payStat,jdbcType=CHAR},
+      </if>
+      <if test="record.payChl != null">
+        PAY_CHL = #{record.payChl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payAddr != null">
+        PAY_ADDR = #{record.payAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payOrderid != null">
+        PAY_ORDERID = #{record.payOrderid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merName != null">
+        MER_NAME = #{record.merName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsName != null">
+        GOODS_NAME = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.btlId != null">
+        BTL_ID = #{record.btlId,jdbcType=CHAR},
+      </if>
+      <if test="record.resOne != null">
+        RES_ONE = #{record.resOne,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resTwo != null">
+        RES_TWO = #{record.resTwo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update maney_trans_record
+    set ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      PAY_ID = #{record.payId,jdbcType=CHAR},
+      REC_ID = #{record.recId,jdbcType=VARCHAR},
+      MANEY_AMOUNT = #{record.maneyAmount,jdbcType=DECIMAL},
+      GOODS_CODE = #{record.goodsCode,jdbcType=CHAR},
+      PAY_REM = #{record.payRem,jdbcType=VARCHAR},
+      GOODS_QUA = #{record.goodsQua,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      PAY_STAT = #{record.payStat,jdbcType=CHAR},
+      PAY_CHL = #{record.payChl,jdbcType=VARCHAR},
+      PAY_ADDR = #{record.payAddr,jdbcType=VARCHAR},
+      PAY_ORDERID = #{record.payOrderid,jdbcType=VARCHAR},
+      MER_NAME = #{record.merName,jdbcType=VARCHAR},
+      GOODS_NAME = #{record.goodsName,jdbcType=VARCHAR},
+      BTL_ID = #{record.btlId,jdbcType=CHAR},
+      RES_ONE = #{record.resOne,jdbcType=VARCHAR},
+      RES_TWO = #{record.resTwo,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longwu.maney.model.TransRecord">
+    update maney_trans_record
+    <set>
+      <if test="payId != null">
+        PAY_ID = #{payId,jdbcType=CHAR},
+      </if>
+      <if test="recId != null">
+        REC_ID = #{recId,jdbcType=VARCHAR},
+      </if>
+      <if test="maneyAmount != null">
+        MANEY_AMOUNT = #{maneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsCode != null">
+        GOODS_CODE = #{goodsCode,jdbcType=CHAR},
+      </if>
+      <if test="payRem != null">
+        PAY_REM = #{payRem,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsQua != null">
+        GOODS_QUA = #{goodsQua,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="payStat != null">
+        PAY_STAT = #{payStat,jdbcType=CHAR},
+      </if>
+      <if test="payChl != null">
+        PAY_CHL = #{payChl,jdbcType=VARCHAR},
+      </if>
+      <if test="payAddr != null">
+        PAY_ADDR = #{payAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="payOrderid != null">
+        PAY_ORDERID = #{payOrderid,jdbcType=VARCHAR},
+      </if>
+      <if test="merName != null">
+        MER_NAME = #{merName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="btlId != null">
+        BTL_ID = #{btlId,jdbcType=CHAR},
+      </if>
+      <if test="resOne != null">
+        RES_ONE = #{resOne,jdbcType=VARCHAR},
+      </if>
+      <if test="resTwo != null">
+        RES_TWO = #{resTwo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORDER_ID = #{orderId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longwu.maney.model.TransRecord">
+    update maney_trans_record
+    set PAY_ID = #{payId,jdbcType=CHAR},
+      REC_ID = #{recId,jdbcType=VARCHAR},
+      MANEY_AMOUNT = #{maneyAmount,jdbcType=DECIMAL},
+      GOODS_CODE = #{goodsCode,jdbcType=CHAR},
+      PAY_REM = #{payRem,jdbcType=VARCHAR},
+      GOODS_QUA = #{goodsQua,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      PAY_STAT = #{payStat,jdbcType=CHAR},
+      PAY_CHL = #{payChl,jdbcType=VARCHAR},
+      PAY_ADDR = #{payAddr,jdbcType=VARCHAR},
+      PAY_ORDERID = #{payOrderid,jdbcType=VARCHAR},
+      MER_NAME = #{merName,jdbcType=VARCHAR},
+      GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      BTL_ID = #{btlId,jdbcType=CHAR},
+      RES_ONE = #{resOne,jdbcType=VARCHAR},
+      RES_TWO = #{resTwo,jdbcType=VARCHAR}
+    where ORDER_ID = #{orderId,jdbcType=BIGINT}
+  </update>
+</mapper>

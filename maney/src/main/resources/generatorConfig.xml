@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
+<generatorConfiguration>  
+    <classPathEntry  location="C:/Users/code8807/.m2/repository/mysql/mysql-connector-java/5.1.45/mysql-connector-java-5.1.45.jar"/>
+    <context id="DB2Tables"  targetRuntime="MyBatis3">  
+        <commentGenerator>  
+            <property name="suppressDate" value="true"/>  
+            <property name="suppressAllComments" value="true"/>  
+        </commentGenerator>  
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" 
+        connectionURL="" userId="" password="">
+        </jdbcConnection>  
+        <javaTypeResolver>  
+            <property name="forceBigDecimals" value="false"/>  
+        </javaTypeResolver>  
+        <javaModelGenerator targetPackage="com.longwu.maney.model" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>  
+            <property name="trimStrings" value="true"/>  
+        </javaModelGenerator>  
+        <sqlMapGenerator targetPackage="mapper" targetProject="src\main\resources">
+            <property name="enableSubPackages" value="true"/>  
+        </sqlMapGenerator>  
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.longwu.maney.dao" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>  
+        </javaClientGenerator>
+        <table tableName="MANEY_USER_INFO" domainObjectName="UserInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_REG_INFO" domainObjectName="RegInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_MER_INFO" domainObjectName="MerInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_MER_ADMIN" domainObjectName="MerAdmin" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_ACT_INFO" domainObjectName="ActInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_UM_RELATE" domainObjectName="UmRelate" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_CHANNEL_CONTRAST" domainObjectName="ChannelContrast" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_TRANS_RECORD" domainObjectName="TransRecord" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_ACT_RECORD" domainObjectName="ActRecord" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_MENU_INFO" domainObjectName="MenuInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_NOTICE" domainObjectName="Mnotice" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_SYSTEM_PARAM" domainObjectName="SystemParam" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_HP_AD" domainObjectName="HpAd" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_GOODS_INFO" domainObjectName="GoodsInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_USER_LOGIN" domainObjectName="UserLogin" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_MER_LOGIN" domainObjectName="MerLogin" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_USER_MESSAGE" domainObjectName="UserMessage" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_MER_CASH" domainObjectName="MerCash" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_CASH_RECORD" domainObjectName="CashRecord" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_CARD_INFO" domainObjectName="CardInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_SIGN_INFO" domainObjectName="SignInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_COMMENT_INFO" domainObjectName="CommentInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_MER_GOODSTYPE" domainObjectName="MerGoodstype" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_MER_SCHEDULE" domainObjectName="MerSchedule" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_VIDEO_INFO" domainObjectName="VideoInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_MER_MAPPER" domainObjectName="MerMapper" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_SUBMER_SCHEDULE" domainObjectName="SubmerSchedule" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_COACH_INFO" domainObjectName="CoachInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="MANEY_MER_COACH_MAPPER" domainObjectName="MerCoachMapper" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+    </context>
+</generatorConfiguration>  

@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longwu.maney.dao.RegInfoMapper">
+  <resultMap id="BaseResultMap" type="com.longwu.maney.model.RegInfo">
+    <id column="USER_ID" jdbcType="CHAR" property="userId" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="USER_CER" jdbcType="VARCHAR" property="userCer" />
+    <result column="USER_SEX" jdbcType="CHAR" property="userSex" />
+    <result column="USER_NATION" jdbcType="CHAR" property="userNation" />
+    <result column="USER_EMAIL" jdbcType="VARCHAR" property="userEmail" />
+    <result column="USER_AREA" jdbcType="VARCHAR" property="userArea" />
+    <result column="USER_ADDR" jdbcType="VARCHAR" property="userAddr" />
+    <result column="USER_IND" jdbcType="VARCHAR" property="userInd" />
+    <result column="USER_POS" jdbcType="VARCHAR" property="userPos" />
+    <result column="USER_INT" jdbcType="VARCHAR" property="userInt" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="CHAR" property="updateTime" />
+    <result column="USER_OLD" jdbcType="VARCHAR" property="userOld" />
+    <result column="USER_MOBILE" jdbcType="VARCHAR" property="userMobile" />
+    <result column="USER_GUA" jdbcType="VARCHAR" property="userGua" />
+    <result column="REL_USER" jdbcType="VARCHAR" property="relUser" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    USER_ID, USER_NAME, USER_CER, USER_SEX, USER_NATION, USER_EMAIL, USER_AREA, USER_ADDR, 
+    USER_IND, USER_POS, USER_INT, CREATE_TIME, UPDATE_TIME, USER_OLD, USER_MOBILE, USER_GUA, 
+    REL_USER
+  </sql>
+  <select id="selectByExample" parameterType="com.longwu.maney.model.RegInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from maney_reg_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from maney_reg_info
+    where USER_ID = #{userId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from maney_reg_info
+    where USER_ID = #{userId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.longwu.maney.model.RegInfoExample">
+    delete from maney_reg_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.longwu.maney.model.RegInfo">
+    insert into maney_reg_info (USER_ID, USER_NAME, USER_CER, 
+      USER_SEX, USER_NATION, USER_EMAIL, 
+      USER_AREA, USER_ADDR, USER_IND, 
+      USER_POS, USER_INT, CREATE_TIME, 
+      UPDATE_TIME, USER_OLD, USER_MOBILE, 
+      USER_GUA, REL_USER)
+    values (#{userId,jdbcType=CHAR}, #{userName,jdbcType=VARCHAR}, #{userCer,jdbcType=VARCHAR}, 
+      #{userSex,jdbcType=CHAR}, #{userNation,jdbcType=CHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{userArea,jdbcType=VARCHAR}, #{userAddr,jdbcType=VARCHAR}, #{userInd,jdbcType=VARCHAR}, 
+      #{userPos,jdbcType=VARCHAR}, #{userInt,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, 
+      #{updateTime,jdbcType=CHAR}, #{userOld,jdbcType=VARCHAR}, #{userMobile,jdbcType=VARCHAR}, 
+      #{userGua,jdbcType=VARCHAR}, #{relUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.longwu.maney.model.RegInfo">
+    insert into maney_reg_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="userCer != null">
+        USER_CER,
+      </if>
+      <if test="userSex != null">
+        USER_SEX,
+      </if>
+      <if test="userNation != null">
+        USER_NATION,
+      </if>
+      <if test="userEmail != null">
+        USER_EMAIL,
+      </if>
+      <if test="userArea != null">
+        USER_AREA,
+      </if>
+      <if test="userAddr != null">
+        USER_ADDR,
+      </if>
+      <if test="userInd != null">
+        USER_IND,
+      </if>
+      <if test="userPos != null">
+        USER_POS,
+      </if>
+      <if test="userInt != null">
+        USER_INT,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="userOld != null">
+        USER_OLD,
+      </if>
+      <if test="userMobile != null">
+        USER_MOBILE,
+      </if>
+      <if test="userGua != null">
+        USER_GUA,
+      </if>
+      <if test="relUser != null">
+        REL_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=CHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userCer != null">
+        #{userCer,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=CHAR},
+      </if>
+      <if test="userNation != null">
+        #{userNation,jdbcType=CHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userArea != null">
+        #{userArea,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddr != null">
+        #{userAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="userInd != null">
+        #{userInd,jdbcType=VARCHAR},
+      </if>
+      <if test="userPos != null">
+        #{userPos,jdbcType=VARCHAR},
+      </if>
+      <if test="userInt != null">
+        #{userInt,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="userOld != null">
+        #{userOld,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null">
+        #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userGua != null">
+        #{userGua,jdbcType=VARCHAR},
+      </if>
+      <if test="relUser != null">
+        #{relUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.longwu.maney.model.RegInfoExample" resultType="java.lang.Long">
+    select count(*) from maney_reg_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update maney_reg_info
+    <set>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=CHAR},
+      </if>
+      <if test="record.userName != null">
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userCer != null">
+        USER_CER = #{record.userCer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSex != null">
+        USER_SEX = #{record.userSex,jdbcType=CHAR},
+      </if>
+      <if test="record.userNation != null">
+        USER_NATION = #{record.userNation,jdbcType=CHAR},
+      </if>
+      <if test="record.userEmail != null">
+        USER_EMAIL = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userArea != null">
+        USER_AREA = #{record.userArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddr != null">
+        USER_ADDR = #{record.userAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userInd != null">
+        USER_IND = #{record.userInd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPos != null">
+        USER_POS = #{record.userPos,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userInt != null">
+        USER_INT = #{record.userInt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      </if>
+      <if test="record.userOld != null">
+        USER_OLD = #{record.userOld,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userMobile != null">
+        USER_MOBILE = #{record.userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userGua != null">
+        USER_GUA = #{record.userGua,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relUser != null">
+        REL_USER = #{record.relUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update maney_reg_info
+    set USER_ID = #{record.userId,jdbcType=CHAR},
+      USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      USER_CER = #{record.userCer,jdbcType=VARCHAR},
+      USER_SEX = #{record.userSex,jdbcType=CHAR},
+      USER_NATION = #{record.userNation,jdbcType=CHAR},
+      USER_EMAIL = #{record.userEmail,jdbcType=VARCHAR},
+      USER_AREA = #{record.userArea,jdbcType=VARCHAR},
+      USER_ADDR = #{record.userAddr,jdbcType=VARCHAR},
+      USER_IND = #{record.userInd,jdbcType=VARCHAR},
+      USER_POS = #{record.userPos,jdbcType=VARCHAR},
+      USER_INT = #{record.userInt,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      USER_OLD = #{record.userOld,jdbcType=VARCHAR},
+      USER_MOBILE = #{record.userMobile,jdbcType=VARCHAR},
+      USER_GUA = #{record.userGua,jdbcType=VARCHAR},
+      REL_USER = #{record.relUser,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longwu.maney.model.RegInfo">
+    update maney_reg_info
+    <set>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userCer != null">
+        USER_CER = #{userCer,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        USER_SEX = #{userSex,jdbcType=CHAR},
+      </if>
+      <if test="userNation != null">
+        USER_NATION = #{userNation,jdbcType=CHAR},
+      </if>
+      <if test="userEmail != null">
+        USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userArea != null">
+        USER_AREA = #{userArea,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddr != null">
+        USER_ADDR = #{userAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="userInd != null">
+        USER_IND = #{userInd,jdbcType=VARCHAR},
+      </if>
+      <if test="userPos != null">
+        USER_POS = #{userPos,jdbcType=VARCHAR},
+      </if>
+      <if test="userInt != null">
+        USER_INT = #{userInt,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="userOld != null">
+        USER_OLD = #{userOld,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null">
+        USER_MOBILE = #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userGua != null">
+        USER_GUA = #{userGua,jdbcType=VARCHAR},
+      </if>
+      <if test="relUser != null">
+        REL_USER = #{relUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longwu.maney.model.RegInfo">
+    update maney_reg_info
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_CER = #{userCer,jdbcType=VARCHAR},
+      USER_SEX = #{userSex,jdbcType=CHAR},
+      USER_NATION = #{userNation,jdbcType=CHAR},
+      USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+      USER_AREA = #{userArea,jdbcType=VARCHAR},
+      USER_ADDR = #{userAddr,jdbcType=VARCHAR},
+      USER_IND = #{userInd,jdbcType=VARCHAR},
+      USER_POS = #{userPos,jdbcType=VARCHAR},
+      USER_INT = #{userInt,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      USER_OLD = #{userOld,jdbcType=VARCHAR},
+      USER_MOBILE = #{userMobile,jdbcType=VARCHAR},
+      USER_GUA = #{userGua,jdbcType=VARCHAR},
+      REL_USER = #{relUser,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=CHAR}
+  </update>
+</mapper>

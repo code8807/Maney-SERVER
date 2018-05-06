@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longwu.maney.dao.ChannelContrastMapper">
+  <resultMap id="BaseResultMap" type="com.longwu.maney.model.ChannelContrast">
+    <id column="CHL_ID" jdbcType="INTEGER" property="chlId" />
+    <result column="CHL_LEVEL" jdbcType="CHAR" property="chlLevel" />
+    <result column="CHL_REM" jdbcType="VARCHAR" property="chlRem" />
+    <result column="PRE_CHL" jdbcType="CHAR" property="preChl" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="CHAR" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CHL_ID, CHL_LEVEL, CHL_REM, PRE_CHL, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.longwu.maney.model.ChannelContrastExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from maney_channel_contrast
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from maney_channel_contrast
+    where CHL_ID = #{chlId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from maney_channel_contrast
+    where CHL_ID = #{chlId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.longwu.maney.model.ChannelContrastExample">
+    delete from maney_channel_contrast
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.longwu.maney.model.ChannelContrast">
+    insert into maney_channel_contrast (CHL_ID, CHL_LEVEL, CHL_REM, 
+      PRE_CHL, CREATE_TIME, UPDATE_TIME
+      )
+    values (#{chlId,jdbcType=INTEGER}, #{chlLevel,jdbcType=CHAR}, #{chlRem,jdbcType=VARCHAR}, 
+      #{preChl,jdbcType=CHAR}, #{createTime,jdbcType=CHAR}, #{updateTime,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.longwu.maney.model.ChannelContrast">
+    insert into maney_channel_contrast
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="chlId != null">
+        CHL_ID,
+      </if>
+      <if test="chlLevel != null">
+        CHL_LEVEL,
+      </if>
+      <if test="chlRem != null">
+        CHL_REM,
+      </if>
+      <if test="preChl != null">
+        PRE_CHL,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="chlId != null">
+        #{chlId,jdbcType=INTEGER},
+      </if>
+      <if test="chlLevel != null">
+        #{chlLevel,jdbcType=CHAR},
+      </if>
+      <if test="chlRem != null">
+        #{chlRem,jdbcType=VARCHAR},
+      </if>
+      <if test="preChl != null">
+        #{preChl,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.longwu.maney.model.ChannelContrastExample" resultType="java.lang.Long">
+    select count(*) from maney_channel_contrast
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update maney_channel_contrast
+    <set>
+      <if test="record.chlId != null">
+        CHL_ID = #{record.chlId,jdbcType=INTEGER},
+      </if>
+      <if test="record.chlLevel != null">
+        CHL_LEVEL = #{record.chlLevel,jdbcType=CHAR},
+      </if>
+      <if test="record.chlRem != null">
+        CHL_REM = #{record.chlRem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preChl != null">
+        PRE_CHL = #{record.preChl,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update maney_channel_contrast
+    set CHL_ID = #{record.chlId,jdbcType=INTEGER},
+      CHL_LEVEL = #{record.chlLevel,jdbcType=CHAR},
+      CHL_REM = #{record.chlRem,jdbcType=VARCHAR},
+      PRE_CHL = #{record.preChl,jdbcType=CHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longwu.maney.model.ChannelContrast">
+    update maney_channel_contrast
+    <set>
+      <if test="chlLevel != null">
+        CHL_LEVEL = #{chlLevel,jdbcType=CHAR},
+      </if>
+      <if test="chlRem != null">
+        CHL_REM = #{chlRem,jdbcType=VARCHAR},
+      </if>
+      <if test="preChl != null">
+        PRE_CHL = #{preChl,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+      </if>
+    </set>
+    where CHL_ID = #{chlId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longwu.maney.model.ChannelContrast">
+    update maney_channel_contrast
+    set CHL_LEVEL = #{chlLevel,jdbcType=CHAR},
+      CHL_REM = #{chlRem,jdbcType=VARCHAR},
+      PRE_CHL = #{preChl,jdbcType=CHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR}
+    where CHL_ID = #{chlId,jdbcType=INTEGER}
+  </update>
+</mapper>
